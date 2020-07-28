@@ -1,6 +1,5 @@
-package com.example.demo.junit
+package com.example.demo
 
-import com.example.demo.*
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import org.assertj.core.api.Assertions

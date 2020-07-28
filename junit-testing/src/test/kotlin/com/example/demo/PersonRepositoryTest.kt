@@ -1,7 +1,5 @@
-package com.example.demo.junit
+package com.example.demo
 
-import com.example.demo.Person
-import com.example.demo.PersonRepository
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.ExtensionContext
