@@ -23,9 +23,16 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("com.h2database:h2")
+
+    // junit 5
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
+
+    // kotlin test
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+    testImplementation("io.kotlintest:kotlintest-extensions-spring:3.4.2")
+    testImplementation("com.ninja-squad:springmockk:2.0.2")
 }
 
 tasks.withType<Test> {
@@ -37,4 +44,8 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "11"
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
