@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class com.example.demo.kotlintest.PersonRepositoryTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class com.example.demo.kotlintest.PersonRepositoryTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.example.demo.kotlintest.html">com.example.demo.kotlintest</a> &gt; PersonRepositoryTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.613s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">findByName will return persons correctly</td>
+<td class="success">0.613s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2020-07-28 23:53:06.487  INFO 46799 --- [0 @coroutine#10] b.t.a.o.j.DataJpaTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.demo.kotlintest.PersonRepositoryTest], using SpringBootContextLoader
+2020-07-28 23:53:06.489  INFO 46799 --- [0 @coroutine#10] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.example.demo.kotlintest.PersonRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2020-07-28 23:53:06.489  INFO 46799 --- [0 @coroutine#10] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.demo.kotlintest.PersonRepositoryTest]: PersonRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2020-07-28 23:53:06.499  INFO 46799 --- [0 @coroutine#10] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.demo.DemoApplication for test class com.example.demo.kotlintest.PersonRepositoryTest
+2020-07-28 23:53:06.501  INFO 46799 --- [0 @coroutine#10] b.t.a.o.j.DataJpaTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [com.ninjasquad.springmockk.MockkTestExecutionListener, com.ninjasquad.springmockk.ClearMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2020-07-28 23:53:06.502  INFO 46799 --- [0 @coroutine#10] b.t.a.o.j.DataJpaTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3178825a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3dc970b2, com.ninjasquad.springmockk.MockkTestExecutionListener@20106817, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@96d45d6, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@7cf27cf3, org.springframework.test.context.support.DirtiesContextTestExecutionListener@ac8cf3f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@293b5ea1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4a1beda5, org.springframework.test.context.event.EventPublishingTestExecutionListener@256115f1, com.ninjasquad.springmockk.ClearMocksTestExecutionListener@691c9755, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1a211281, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@fc2a2a5, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2221e031, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2f8a6d1f, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@3d2dd775, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@27609dff]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.2.RELEASE)
+
+2020-07-28 23:53:06.599  INFO 46799 --- [0 @coroutine#10] c.e.d.kotlintest.PersonRepositoryTest    : Starting PersonRepositoryTest on keullaeseu101ui-MacBookPro-88.local with PID 46799 (/Users/K/workspace/personal/comparison-testing-library/kotlintest-testing/build/classes/kotlin/test started by K in /Users/K/workspace/personal/comparison-testing-library/kotlintest-testing)
+2020-07-28 23:53:06.601  INFO 46799 --- [0 @coroutine#10] c.e.d.kotlintest.PersonRepositoryTest    : No active profile set, falling back to default profiles: default
+2020-07-28 23:53:06.811  INFO 46799 --- [0 @coroutine#10] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in LAZY mode.
+2020-07-28 23:53:06.886  INFO 46799 --- [0 @coroutine#10] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 61ms. Found 1 JPA repository interfaces.
+2020-07-28 23:53:06.938  INFO 46799 --- [0 @coroutine#10] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2020-07-28 23:53:06.996  INFO 46799 --- [0 @coroutine#10] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:013bab4e-f169-4b3f-970f-ce7ec5fe5e12;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2020-07-28 23:53:07.486  INFO 46799 --- [0 @coroutine#10] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-28 23:53:07.555  INFO 46799 --- [0 @coroutine#10] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.18.Final
+2020-07-28 23:53:07.608  INFO 46799 --- [0 @coroutine#10] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-28 23:53:07.821  INFO 46799 --- [0 @coroutine#10] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists person CASCADE 
+Hibernate: create table person (id varchar(255) not null, age integer not null, email varchar(255), mobile varchar(255), name varchar(255), primary key (id))
+2020-07-28 23:53:08.380  INFO 46799 --- [0 @coroutine#10] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-28 23:53:08.389  INFO 46799 --- [0 @coroutine#10] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-28 23:53:08.480  INFO 46799 --- [0 @coroutine#10] c.e.d.kotlintest.PersonRepositoryTest    : Started PersonRepositoryTest in 1.962 seconds (JVM running for 7.672)
+2020-07-28 23:53:08.579  INFO 46799 --- [1 @coroutine#10] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@4372a963 testClass = PersonRepositoryTest, testInstance = com.example.demo.kotlintest.PersonRepositoryTest@571393c9, testMethod = kotlintestDummyMethod@PersonRepositoryTest.ByteBuddy.yU3FWjRu, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@482c4a88 testClass = PersonRepositoryTest, locations = '{}', classes = '{class com.example.demo.DemoApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[MockkContextCustomizer(definitions=[]), org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@352a161c, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@fccff812, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@373af380, [ImportsContextCustomizer@2e90e6db key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@525f20ae, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@530c1346, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.context.SpringBootTestArgs@1], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map[[empty]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3420585e]; rollback [true]
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: select person0_.id as id1_0_, person0_.age as age2_0_, person0_.email as email3_0_, person0_.mobile as mobile4_0_, person0_.name as name5_0_ from person person0_ where person0_.name=?
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into person (age, email, mobile, name, id) values (?, ?, ?, ?, ?)
+Hibernate: select person0_.id as id1_0_, person0_.age as age2_0_, person0_.email as email3_0_, person0_.mobile as mobile4_0_, person0_.name as name5_0_ from person person0_ where person0_.name=?
+2020-07-28 23:53:09.193  INFO 46799 --- [1 @coroutine#10] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@4372a963 testClass = PersonRepositoryTest, testInstance = com.example.demo.kotlintest.PersonRepositoryTest@571393c9, testMethod = kotlintestDummyMethod@PersonRepositoryTest.ByteBuddy.LMe4nXPE, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@482c4a88 testClass = PersonRepositoryTest, locations = '{}', classes = '{class com.example.demo.DemoApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTestContextBootstrapper=true}', contextCustomizers = set[MockkContextCustomizer(definitions=[]), org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory$DisableAutoConfigurationContextCustomizer@352a161c, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizer@351584c0, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@fccff812, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@373af380, [ImportsContextCustomizer@2e90e6db key = [org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration, org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration, org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration, org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration, org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration, org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManagerAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@525f20ae, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@530c1346, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.context.SpringBootTestArgs@1], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map[[empty]]]
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 6.4.1</a> at Jul 28, 2020, 11:53:10 PM</p>
+</div>
+</div>
+</body>
+</html>
