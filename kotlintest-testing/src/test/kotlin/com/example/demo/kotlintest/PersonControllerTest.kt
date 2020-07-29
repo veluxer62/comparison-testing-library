@@ -58,13 +58,7 @@ class PersonControllerTest : StringSpec() {
 
         "api will return persons correctly if given id" {
             // given
-            val expected = FetchPersonData(
-                id = "test-id",
-                name = "김삿갓",
-                email = "foo@gmail.com",
-                mobile = "01022221111",
-                age = 40
-            )
+            val expected = FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
 
             every { personService.fetchById("test-id") } returns expected
 
