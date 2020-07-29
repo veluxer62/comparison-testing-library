@@ -1,8 +1,11 @@
 package com.example.demo
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -20,127 +23,91 @@ class PersonServiceTest {
 
     @Test
     fun `create will create person correctly`() {
-        val data = CreationPersonData(
-            id = "test-id",
-            name = "홍길동",
-            email = "test@gmail.com",
-            mobile = "01011112222",
-            age = 30
-        )
+        // given
+        val given = CreationPersonData("test-id", "홍길동", "test@gmail.com", "01011112222", 30)
+        val expected = Person("test-id", "홍길동", "test@gmail.com", "01011112222", 30)
 
-        val expected = Person(
-            id = "test-id",
-            name = "홍길동",
-            email = "test@gmail.com",
-            mobile = "01011112222",
-            age = 30
-        )
+        // when
+        personService.create(given)
 
-        personService.create(data)
-
-        Mockito.verify(personRepository).save(expected)
+        // then
+        verify(personRepository).save(expected)
     }
 
     @Test
     fun `update will update person correctly`() {
+        // given
         val id = "test-id"
-        val data = UpdatePersonData(
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
+        val given = UpdatePersonData("김삿갓", "foo@gmail.com", "01022221111", 40)
 
-        Mockito.`when`(personRepository.findById(id))
-            .thenReturn(Optional.of(Person(
-                id = "test-id",
-                name = "홍길동",
-                email = "test@gmail.com",
-                mobile = "01011112222",
-                age = 30
-            )))
+        `when`(personRepository.findById(id))
+            .thenReturn(
+                Optional.of(Person("test-id", "홍길동", "test@gmail.com", "01011112222", 30))
+            )
 
-        val expected = Person(
-            id = "test-id",
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
+        val expected = Person("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
 
-        personService.update(id, data)
+        // when
+        personService.update(id, given)
 
-        Mockito.verify(personRepository).save(expected)
+        // then
+        verify(personRepository).save(expected)
     }
 
     @Test
     fun `update will throw EntityNotFoundException if person is not exists`() {
+        // given
         val id = "test-id"
-        val data = UpdatePersonData(
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
+        val given = UpdatePersonData("김삿갓", "foo@gmail.com", "01022221111", 40)
 
-        Mockito.`when`(personRepository.findById(id))
+        // when
+        `when`(personRepository.findById(id))
             .thenThrow(EntityNotFoundException())
 
-        Assertions.assertThrows(EntityNotFoundException::class.java) {
-            personService.update(id, data)
+        // then
+        assertThrows(EntityNotFoundException::class.java) {
+            personService.update(id, given)
         }
     }
 
     @Test
-    fun `fetchById will return person correctly`() {
+    fun `fethById will return person correctly`() {
+        // given
         val id = "test-id"
 
-        Mockito.`when`(personRepository.findById(id))
-            .thenReturn(Optional.of(Person(
-                id = "test-id",
-                name = "김삿갓",
-                email = "foo@gmail.com",
-                mobile = "01022221111",
-                age = 40
-            )))
+        `when`(personRepository.findById(id))
+            .thenReturn(
+                Optional.of(Person("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40))
+            )
 
-        val expected = FetchPersonData(
-            id = "test-id",
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
+        val expected = FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
 
+        // when
         val actual = personService.fetchById(id)
 
-        Assertions.assertEquals(expected, actual)
+        // then
+        assertEquals(expected, actual)
     }
 
     @Test
     fun `fetchByName will return list correctly`() {
-        Mockito.`when`(personRepository.findByName("홍길동"))
-            .thenReturn(listOf(Person(
-                id = "test-id",
-                name = "김삿갓",
-                email = "foo@gmail.com",
-                mobile = "01022221111",
-                age = 40
-            )))
+        // given
+        `when`(personRepository.findByName("홍길동"))
+            .thenReturn(
+                listOf(Person("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40))
+            )
 
-        val expected = listOf(FetchPersonData(
-            id = "test-id",
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        ))
+        val expected = listOf(
+            FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
+        )
 
         val query = FetchPersonByNameQuery("홍길동")
 
+        // when
         val actual = personService.fetchByName(query)
 
-        Assertions.assertEquals(expected, actual)
+        // then
+        assertEquals(expected, actual)
     }
 
 }

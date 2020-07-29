@@ -2,9 +2,10 @@ package com.example.demo
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -24,69 +25,62 @@ class PersonControllerTest {
 
     @Test
     fun `api will return persons correctly if given name`() {
-
-        val persons = listOf(
-            FetchPersonData(
-                id = "test-id",
-                name = "김삿갓",
-                email = "foo@gmail.com",
-                mobile = "01022221111",
-                age = 40
+        // given
+        `when`(personService.fetchByName(FetchPersonByNameQuery("홍길동")))
+            .thenReturn(
+                listOf(FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40))
             )
+
+        val expected = ListItem(
+            listOf(FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40))
         )
-        Mockito.`when`(personService.fetchByName(FetchPersonByNameQuery("홍길동")))
-            .thenReturn(persons)
 
-        val expected = ListItem(persons)
-
-        mvc.perform(get("/persons")
-            .contentType(MediaType.APPLICATION_JSON)
-            .param("name", "홍길동"))
+        // when
+        mvc
+            .perform(
+                get("/persons")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .param("name", "홍길동")
+            )
             .andExpect(status().isOk)
             .andExpect {
                 val actual = jacksonObjectMapper()
                     .readValue(it.response.contentAsString, jacksonTypeRef<ListItem<FetchPersonData>>())
 
-                Assertions.assertThat(actual).isEqualTo(expected)
+                // then
+                assertThat(actual).isEqualTo(expected)
             }
 
     }
 
     @Test
     fun `api will return persons correctly if given id`() {
+        // given
+        val expected = FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
 
-        val expected = FetchPersonData(
-            id = "test-id",
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
-        Mockito.`when`(personService.fetchById("test-id"))
-            .thenReturn(expected)
+        `when`(personService.fetchById("test-id")).thenReturn(expected)
 
-        mvc.perform(get("/persons/test-id")
-            .contentType(MediaType.APPLICATION_JSON))
+        // when
+        mvc
+            .perform(
+                get("/persons/test-id")
+                    .contentType(MediaType.APPLICATION_JSON)
+            )
             .andExpect(status().isOk)
             .andExpect {
                 val actual = jacksonObjectMapper()
                     .readValue(it.response.contentAsString, jacksonTypeRef<FetchPersonData>())
 
-                Assertions.assertThat(actual).isEqualTo(expected)
+                // then
+                assertThat(actual).isEqualTo(expected)
             }
 
     }
 
     @Test
     fun `api will create person correctly`() {
-
-        val expected = CreationPersonData(
-            id = "test-id",
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
+        // given
+        val expected = CreationPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
 
         val content = """
             {
@@ -98,24 +92,25 @@ class PersonControllerTest {
             }
         """.trimIndent()
 
-        mvc.perform(post("/persons")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(content))
+        // when
+        mvc
+            .perform(
+                post("/persons")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(content)
+            )
             .andExpect(status().isCreated)
 
-        Mockito.verify(personService).create(expected)
+        // then
+        verify(personService).create(expected)
     }
 
     @Test
     fun `api will update person correctly`() {
-
+        // given
         val id = "test-id"
-        val expected = UpdatePersonData(
-            name = "김삿갓",
-            email = "foo@gmail.com",
-            mobile = "01022221111",
-            age = 40
-        )
+
+        val expected = UpdatePersonData("김삿갓", "foo@gmail.com", "01022221111", 40)
 
         val content = """
             {
@@ -126,12 +121,17 @@ class PersonControllerTest {
             }
         """.trimIndent()
 
-        mvc.perform(put("/persons/test-id")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(content))
+        // when
+        mvc
+            .perform(
+                put("/persons/test-id")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(content)
+            )
             .andExpect(status().isOk)
 
-        Mockito.verify(personService).update(id, expected)
+        // then
+        verify(personService).update(id, expected)
     }
 
 }

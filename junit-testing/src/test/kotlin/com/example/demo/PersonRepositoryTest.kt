@@ -1,7 +1,6 @@
 package com.example.demo
 
-import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.extension.ExtendWith
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -10,11 +9,8 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
-import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.util.*
 import java.util.stream.Stream
 
-@ExtendWith(SpringExtension::class)
 @DataJpaTest(showSql = true)
 class PersonRepositoryTest {
 
@@ -26,56 +22,42 @@ class PersonRepositoryTest {
 
     @ParameterizedTest
     @ArgumentsSource(FindByNameTestArguments::class)
-    fun `findByName will return persons correctly`(
-        given: List<Person>, expected: List<Person>
-    ) {
+    fun `findByName will return persons correctly`(given: List<Person>, expected: List<Person>) {
+        // given
         given.forEach {
             testEntityManager.persistAndFlush(it)
         }
 
+        // when
         val actual = personRepository.findByName("홍길동")
 
-        Assertions.assertThat(actual).containsAll(expected)
+        // then
+        assertThat(actual).containsAll(expected)
     }
 }
 
 class FindByNameTestArguments : ArgumentsProvider {
     override fun provideArguments(context: ExtensionContext?): Stream<Arguments> =
         Stream.of(
-            Arguments {
-                val given = listOf(
-                    getPerson("홍길동"),
-                    getPerson("홍길동"),
-                    getPerson("홍길동"),
-                    getPerson("아무개")
-                )
-
-                val expected = given.filter { it.name == "홍길동" }
-
-                listOf(given, expected).toTypedArray()
-            },
-
-            Arguments {
-                val given = listOf(
-                    getPerson("홍길동"),
-                    getPerson("홍길동"),
-                    getPerson("아무개"),
-                    getPerson("김삿갓")
-                )
-
-                val expected = given.filter { it.name == "홍길동" }
-
-                listOf(given, expected).toTypedArray()
-            }
+            Arguments.of(
+                getPersons("홍길동", "홍길동", "홍길동", "아무개"),
+                getPersons("홍길동", "홍길동", "홍길동")
+            ),
+            Arguments.of(
+                getPersons("홍길동", "홍길동", "아무개", "아무개"),
+                getPersons("홍길동", "홍길동")
+            )
         )
 
-    private fun getPerson(name: String) =
-        Person(
-            id = UUID.randomUUID().toString(),
-            name = name,
-            email = "test@gmail.com",
-            mobile = "01011112222",
-            age = 30
-        )
+    private fun getPersons(vararg names: String) =
+        names.mapIndexed { index, name ->
+            Person(
+                id = index.toString(),
+                name = name,
+                email = "test@gmail.com",
+                mobile = "01011112222",
+                age = 30
+            )
+        }
 }
 
