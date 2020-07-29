@@ -9,8 +9,6 @@ import io.kotlintest.specs.StringSpec
 import io.kotlintest.spring.SpringListener
 import io.mockk.every
 import io.mockk.verify
-import org.assertj.core.api.Assertions
-import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
@@ -32,37 +30,34 @@ class PersonControllerTest : StringSpec() {
     init {
 
         "api will return persons correctly if given name" {
-
+            // given
             val persons = listOf(
-                FetchPersonData(
-                    id = "test-id",
-                    name = "김삿갓",
-                    email = "foo@gmail.com",
-                    mobile = "01022221111",
-                    age = 40
-                )
+                FetchPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
             )
 
             every { personService.fetchByName(FetchPersonByNameQuery("홍길동")) } returns persons
 
             val expected = ListItem(persons)
 
-            mvc.perform(
-                MockMvcRequestBuilders.get("/persons")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("name", "홍길동"))
+            // when
+            mvc
+                .perform(
+                    MockMvcRequestBuilders.get("/persons")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("name", "홍길동")
+                )
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect {
                     val actual = jacksonObjectMapper()
                         .readValue(it.response.contentAsString, jacksonTypeRef<ListItem<FetchPersonData>>())
 
+                    // then
                     actual shouldBe expected
                 }
-
         }
 
         "api will return persons correctly if given id" {
-
+            // given
             val expected = FetchPersonData(
                 id = "test-id",
                 name = "김삿갓",
@@ -73,28 +68,26 @@ class PersonControllerTest : StringSpec() {
 
             every { personService.fetchById("test-id") } returns expected
 
-            mvc.perform(
-                MockMvcRequestBuilders.get("/persons/test-id")
-                .contentType(MediaType.APPLICATION_JSON))
+            // when
+            mvc
+                .perform(
+                    MockMvcRequestBuilders.get("/persons/test-id")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect {
                     val actual = jacksonObjectMapper()
                         .readValue(it.response.contentAsString, jacksonTypeRef<FetchPersonData>())
 
+                    // then
                     actual shouldBe expected
                 }
 
         }
 
         "api will create person correctly" {
-
-            val expected = CreationPersonData(
-                id = "test-id",
-                name = "김삿갓",
-                email = "foo@gmail.com",
-                mobile = "01022221111",
-                age = 40
-            )
+            // given
+            val expected = CreationPersonData("test-id", "김삿갓", "foo@gmail.com", "01022221111", 40)
 
             val content = """
                 {
@@ -106,43 +99,44 @@ class PersonControllerTest : StringSpec() {
                 }
             """.trimIndent()
 
-            mvc.perform(
-                MockMvcRequestBuilders.post("/persons")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(content))
+            // when
+            mvc
+                .perform(
+                    MockMvcRequestBuilders.post("/persons")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
                 .andExpect(MockMvcResultMatchers.status().isCreated)
 
+            // then
             verify { personService.create(expected) }
-
         }
 
         "api will update person correctly" {
-
+            // given
             val id = "test-id"
-            val expected = UpdatePersonData(
-                name = "김삿갓",
-                email = "foo@gmail.com",
-                mobile = "01022221111",
-                age = 40
-            )
+            val expected = UpdatePersonData("김삿갓", "foo@gmail.com", "01022221111", 40)
 
             val content = """
-            {
-                "name": "김삿갓",
-                "email": "foo@gmail.com",
-                "mobile": "01022221111",
-                "age": 40
-            }
-        """.trimIndent()
+                {
+                    "name": "김삿갓",
+                    "email": "foo@gmail.com",
+                    "mobile": "01022221111",
+                    "age": 40
+                }
+            """.trimIndent()
 
-            mvc.perform(
-                MockMvcRequestBuilders.put("/persons/test-id")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(content))
+            // when
+            mvc
+                .perform(
+                    MockMvcRequestBuilders.put("/persons/test-id")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
                 .andExpect(MockMvcResultMatchers.status().isOk)
 
+            // then
             verify { personService.update(id, expected) }
-
         }
 
     }
